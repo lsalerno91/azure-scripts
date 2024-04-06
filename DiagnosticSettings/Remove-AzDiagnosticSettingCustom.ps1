@@ -1,4 +1,41 @@
+<#
+.SYNOPSIS
+The function Remove-AzDiagnosticSettingCustom removes DS from all the resources of a specific resource type.
 
+.DESCRIPTION
+Before running the function, connect to the Azure tenant and select the subscription where you want to operate.
+You can set the scope of the function at subscription level, or at resource group level.   
+
+.PARAMETER DestinationLaws (Optional)
+Array of strings with the names of the Log Analytics Workspaces. 
+If you want to remove all the diagnostic settings, leave it empty. 
+If you want to delete all the diagnostic settings, except for the ones sending logs to a specific workspace (e.g. the Sentinel workspace), 
+specify the workspace name in this parameter. 
+It can be more than one workspace. 
+
+.PARAMETER ResourceType (Mandatory)
+Specify the type of Azure resource from which you want to delete the diagnostic settings.
+Allowed values: 
+- nsg
+- pip
+- app
+
+.PARAMETER ResourceGroupName (Optional)
+Set the scope at RG level. 
+If not specified, the scope will be at subscription level.
+
+.PARAMETER DryRun
+If you set this parameter, the DS will not be deleted. 
+The function will tell you all the resources that have DS to delete without performing the deletion. 
+
+.EXAMPLE
+Remove-AzDiagnosticSettingCustom -ResourceType nsg -ResourceGroupName conn-tests -DestinationLaws "eeab0244-132c-4ec4-bcc5-57b515a045a2-rg-aksTest-WEU" -DryRun
+
+.NOTES
+VERSION HISTORY
+1.0 | 2024/04/06 | Lorenzo Salerno (l.salerno91@gmail.com)
+
+#>
 
 function Remove-AzDiagnosticSettingCustom {
 
@@ -55,5 +92,3 @@ function Remove-AzDiagnosticSettingCustom {
     $resourcesToDelete
 
 }
-
-Remove-CazDiagnosticSettingCustom -ResourceType nsg -ResourceGroupName conn-tests -DestinationLaws "eeab0244-132c-4ec4-bcc5-57b515a045a2-rg-aksTest-WEU" -DryRun
