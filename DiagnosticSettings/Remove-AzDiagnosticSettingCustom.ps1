@@ -19,6 +19,7 @@ Allowed values:
 - nsg
 - pip
 - app
+- agw
 
 .PARAMETER ResourceGroupName (Optional)
 Set the scope at RG level. 
@@ -66,6 +67,10 @@ function Remove-AzDiagnosticSettingCustom {
             $resources = ($PSBoundParameters.ContainsKey('ResourceGroupName')) ? (Get-AzWebApp -ResourceGroupName $ResourceGroupName) : (Get-AzWebApp) 
 
         }
+        "agw" {
+            Write-Host "ResourceType selected: AGW (Application Gateway)."
+            $resources = ($PSBoundParameters.ContainsKey('ResourceGroupName')) ? (Get-AzApplicationGateway -ResourceGroupName $ResourceGroupName) : (Get-AzApplicationGateway) 
+        }
         default {
             Write-Host "ResourceType selected not valid: " $ResourceType
         }
@@ -92,3 +97,14 @@ function Remove-AzDiagnosticSettingCustom {
     $resourcesToDelete
 
 }
+
+
+$comandoStringa = "Get-AzWebApp -ResourceGroupName 'NomeGruppoRisorse'"
+Invoke-Expression $comandoStringa
+
+param (
+        [scriptblock]$comando
+    )
+
+    # Esegui il comando fornito come parametro
+    Invoke-Command -ScriptBlock $comando
