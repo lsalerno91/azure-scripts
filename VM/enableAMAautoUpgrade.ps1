@@ -29,12 +29,12 @@ foreach ($vm in $runningVMs) {
         }   
     }
     # check if the VM has the MicrosoftMonitoringAgent and it is in a succeeded provisioning state
-    if ((Get-AzVMExtension -ResourceId $vm.Id).Name -contains "MicrosoftMonitoringAgent" -and (Get-AzVMExtension -ResourceGroupName $vm.ResourceGroupName -VMName $vm.Name -Name "MicrosoftMonitoringAgent").ProvisioningState -eq "Succeeded") {
+    if ((Get-AzVMExtension -ResourceId $vm.Id).Name -contains "AzureMonitorWindowsAgent" -and (Get-AzVMExtension -ResourceGroupName $vm.ResourceGroupName -VMName $vm.Name -Name "AzureMonitorWindowsAgent").ProvisioningState -eq "Succeeded") {
         # check if the AMA has the Automatic Upgrade Disabled
-        if($null -eq (Get-AzVMExtension -ResourceGroupName $vm.ResourceGroupName -VMName $vm.Name -Name "MicrosoftMonitoringAgent").EnableAutomaticUpgrade){
+        if($null -eq (Get-AzVMExtension -ResourceGroupName $vm.ResourceGroupName -VMName $vm.Name -Name "AzureMonitorWindowsAgent").EnableAutomaticUpgrade){
             $linuxVMs += $vm
             Write-Host "Enabling autoupdate on " $vm.Name
-            Set-AzVMExtension -ExtensionName "MicrosoftMonitoringAgent" -ResourceGroupName $vm.ResourceGroupName -VMName $vm.Name -Publisher "Microsoft.Azure.Monitor" `
+            Set-AzVMExtension -ExtensionName "AzureMonitorWindowsAgent" -ResourceGroupName $vm.ResourceGroupName -VMName $vm.Name -Publisher "Microsoft.Azure.Monitor" `
                 -ExtensionType "AzureMonitorWindowsAgent" -EnableAutomaticUpgrade $true
         }   
     }
