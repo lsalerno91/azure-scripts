@@ -16,7 +16,6 @@ Write-Host "Checking AMA auto-upgrade on " ($runningVMs | Measure-Object).Count 
 $linuxVMs = @()
 $windowsVMs = @()
 
-# 
 foreach ($vm in $runningVMs) {
 
     # check if the VM has the AzureMonitorLinuxAgent and it is in a succeeded provisioning state
