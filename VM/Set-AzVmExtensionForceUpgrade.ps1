@@ -16,7 +16,8 @@ Because we changed the value of “forceUpdateTag”, Azure will recognize this 
 String that specify the extension name
 
 .EXAMPLE
-Force-AzVmExtensionUpgrade -ExtensionName "AzureMonitorLinuxAgent"
+Set-AzVmExtensionForceUpgrade -ExtensionName "AzureMonitorLinuxAgent"
+Set-AzVmExtensionForceUpgrade -ExtensionName "AzureMonitorWindowsAgent"
 
 .NOTES
 Before running the function, connect to the Azure tenant and select the subscription where you want to operate.
@@ -60,6 +61,3 @@ function Set-AzVmExtensionForceUpgrade {
     $resourcesUpdated | Format-Table
 
 }
-
-Set-AzVmExtensionForceUpgrade -ExtensionName "AzureMonitorLinuxAgent"
-Set-AzVmExtensionForceUpgrade -ExtensionName "AzureMonitorWindowsAgent"
