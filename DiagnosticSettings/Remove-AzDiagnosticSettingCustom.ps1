@@ -25,7 +25,7 @@ Allowed values:
 Set the scope at RG level. 
 If not specified, the scope will be at subscription level.
 
-.PARAMETER DryRun
+.PARAMETER DryRun (Optional)
 If you set this parameter, the DS will not be deleted. 
 The function will tell you all the resources that have DS to delete without performing the deletion. 
 
@@ -97,14 +97,3 @@ function Remove-AzDiagnosticSettingCustom {
     $resourcesToDelete
 
 }
-
-
-$comandoStringa = "Get-AzWebApp -ResourceGroupName 'NomeGruppoRisorse'"
-Invoke-Expression $comandoStringa
-
-param (
-        [scriptblock]$comando
-    )
-
-    # Esegui il comando fornito come parametro
-    Invoke-Command -ScriptBlock $comando
