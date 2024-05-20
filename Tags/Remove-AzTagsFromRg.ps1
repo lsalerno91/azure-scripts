@@ -35,10 +35,12 @@ function Remove-AzTagsFromRg {
     # Loop through each resource
     foreach ($resource in $resources) {
         # Remove all tags from the resource
-        Write-Host "'Removing tags from resource '$resource.name"
+        Write-Host "Removing tags from resource $($resource.Name)"
         $resource.Tags.Clear()
 
         # Update the resource
         Set-AzResource -ResourceId $resource.ResourceId -Tag $resource.Tags -Force
     }    
 }
+
+Remove-AzTagsFromRg -ResourceGroupName rg_Test
